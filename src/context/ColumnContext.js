@@ -12,7 +12,7 @@ const COLUMN_SETS = {
 };
 
 const arraysEqual = (a1, a2) => {
-    if (a1.length != a2.length) return false;
+    if (a1.length !== a2.length) return false;
     return a1.filter(i => !a2.includes(i)).length === 0;
 };
 
