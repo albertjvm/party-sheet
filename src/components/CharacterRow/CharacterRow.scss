@@ -1,0 +1,14 @@
+.CharacterRow {
+    display: flex;
+    flex-direction: row;
+
+    .Cell { 
+        width: 12.5vw;
+        text-align: center;
+
+        &.Name {
+            width: 25vw;
+            min-width: 200px;
+        }
+    }
+}

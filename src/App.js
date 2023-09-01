@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from 'react';
+import './App.scss';
+import { Debug } from './components';
+import { PartySheet } from './components/PartySheet';
+import { ModalContext } from './context/ModalContext';
+import { RollModal } from './components/RollModal/RollModal';
 
 function App() {
+  const { modalOpen } = useContext(ModalContext);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PartySheet />
+      {/* <Debug /> */}
+      {modalOpen && <RollModal />}
     </div>
   );
 }
