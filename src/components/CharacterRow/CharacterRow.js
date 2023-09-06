@@ -4,7 +4,7 @@ import './CharacterRow.scss';
 import { PartyContext } from '../../context/PartyContext';
 import { ColumnContext } from '../../context/ColumnContext';
 
-export const CharacterRow = ({ character }) => {
+export const CharacterRow = ({ character, locked }) => {
     const { updateValue } = useContext(PartyContext);
     const { columns } = useContext(ColumnContext);
     const { id, name, ...scores } = character;
@@ -15,6 +15,7 @@ export const CharacterRow = ({ character }) => {
                 className='Cell Name' 
                 value={name} 
                 onChange={v => updateValue({characterId: id, key: 'name', value: v})} 
+                readOnly={locked}
             />
             {columns.map(k => (
                 <TextInput 
@@ -23,6 +24,7 @@ export const CharacterRow = ({ character }) => {
                     type="number"
                     value={scores[k] || 0} 
                     onChange={v => updateValue({characterId: id, key: k, value: parseInt(v)})} 
+                    readOnly={locked}
                 />
             ))}
         </div>

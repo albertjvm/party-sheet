@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import './PartySheet.scss';
 import { PartyContext } from '../../context/PartyContext';
 import { CharacterRow } from '../CharacterRow';
@@ -11,6 +11,7 @@ export const PartySheet = () => {
     const { columns, setColumnSet, isDefault, setExists } = useContext(ColumnContext);
     const { setModalOpen } = useContext(ModalContext);
     const { roll } = useContext(RollContext);
+    const [ locked, setLocked ] = useState(true);
 
     const handleClickNew = () => {
         addNewCharacter();
@@ -32,7 +33,16 @@ export const PartySheet = () => {
     return (
         <div className="PartySheet">
             <div className='Header'>
-                <div className='Cell'>Name</div>
+                <div className='Cell'>
+                    <i 
+                        className={`fa-solid fa-lock${locked ? '' : '-open'}`}
+                        style={{
+                            marginRight: '10px'
+                        }}
+                        onClick={() => setLocked(!locked)}
+                    ></i>
+                    Name
+                </div>
                 {columns.map(x => (
                     <div 
                         className='Cell' 
@@ -48,7 +58,7 @@ export const PartySheet = () => {
             </div>
             {!!party?.length && (
                 sortedParty().map((p, i) => 
-                    <CharacterRow key={i} character={p} />
+                    <CharacterRow key={i} character={p} locked={locked} />
                 )
             )}
             <div className='Footer'>
